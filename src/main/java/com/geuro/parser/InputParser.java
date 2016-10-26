@@ -3,7 +3,7 @@ package main.java.com.geuro.parser;
 import java.io.File;
 import java.util.Scanner;
 
-import javax.inject.Inject;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import main.java.com.geuro.domain.Route;
 import main.java.com.geuro.domain.Station;
@@ -12,14 +12,15 @@ import main.java.com.geuro.service.CityMapService;
 public class InputParser {
 	private File file;
 	private Scanner scanner;
-	@Inject
+
 	private CityMapService mapService;
 
-	public InputParser(String fileName) {
+	public InputParser(String fileName, CityMapService map) {
 		if (fileName.length() == 0) {
 
 		}
 		file = new File(fileName);
+		this.mapService = map;
 	}
 
 	public void parse() {
