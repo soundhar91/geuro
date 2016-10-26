@@ -33,7 +33,7 @@ public class CityMapController {
 	public CityMapController() {
 	}
 
-	@RequestMapping(value = "direct",  method = RequestMethod.GET)
+	@RequestMapping(value = "direct", method = RequestMethod.GET)
 	@ResponseBody
 	public RouteResponse getDirectPath(@RequestParam("dep_sid") String startStation,
 			@RequestParam("arr_sid") String endStation) {

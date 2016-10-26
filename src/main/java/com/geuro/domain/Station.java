@@ -22,24 +22,26 @@ public class Station {
 
 	public Station(int stationId, int route) {
 		this.id = stationId;
-		//this.route = route;
+		// this.route = route;
 	}
-	
-	public Station(int stationId){
+
+	public Station(int stationId) {
 		this.id = stationId;
 	}
 
 	public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
 
-        Station s = (Station) o;
+		Station s = (Station) o;
 
-        return id == s.id;
+		return id == s.id;
 
-    }
+	}
 
 	public int hashCode() {
-        return id;
-    }
+		return id;
+	}
 }
