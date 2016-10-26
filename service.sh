@@ -1,9 +1,10 @@
 #!/bin/bash
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-
+parentdir="$(dirname "$DIR")"
 # Keep the pwd in mind!
 # Example: RUN="java -jar $DIR/target/magic.jar"
-RUN="java -jar target/geuro-0.0.1-SNAPSHOT.jar"
+echo $DIR
+RUN="java -jar $DIR/target/geuro-0.0.1-SNAPSHOT.jar"
 NAME="busservice"
 
 DATA_FILE=$2

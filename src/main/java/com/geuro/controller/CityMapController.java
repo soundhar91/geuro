@@ -1,10 +1,11 @@
 package main.java.com.geuro.controller;
 
-import main.java.com.geuro.domain.RouteResponse;
-import main.java.com.geuro.domain.Station;
 import main.java.com.geuro.impl.CityMapServiceImpl;
 import main.java.com.geuro.service.CityMapService;
 import main.java.com.geuro.domain.*;
+import main.java.com.geuro.domain.response.ErrorResponse;
+import main.java.com.geuro.domain.response.Response;
+import main.java.com.geuro.domain.response.RouteResponse;
 
 import javax.annotation.Resource;
 
@@ -35,9 +36,11 @@ public class CityMapController {
 
 	@RequestMapping(value = "direct", method = RequestMethod.GET)
 	@ResponseBody
-	public RouteResponse getDirectPath(@RequestParam("dep_sid") String startStation,
+	public Response getDirectPath(@RequestParam("dep_sid") String startStation,
 			@RequestParam("arr_sid") String endStation) {
-		
+		if (startStation == null || startStation == "" || endStation == null || endStation == "") {
+			return new ErrorResponse("Invalid parameters");
+		}
 		Station st1 = new Station(Integer.parseInt(startStation));
 		Station st2 = new Station(Integer.parseInt(endStation));
 		return mapService.hasDirectRoute(st1, st2);

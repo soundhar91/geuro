@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import main.java.com.geuro.domain.*;
+import main.java.com.geuro.domain.response.RouteResponse;
 import main.java.com.geuro.service.CityMapService;
 
 @Service
@@ -20,7 +21,6 @@ public class CityMapServiceImpl implements CityMapService {
 	}
 
 	public RouteResponse hasDirectRoute(Station station1, Station station2) {
-		System.out.println(StationMap.size()+"---"+RouteMap.size());
 		if (StationMap.containsKey(station1) == false || StationMap.containsKey(station2) == false) {
 			return new RouteResponse(station1, station2, false);
 		}

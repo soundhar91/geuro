@@ -24,7 +24,7 @@ public class InputParser {
 	}
 
 	private Scanner scanner;
-	static Logger log = Logger.getLogger(InputParser.class);
+	static Logger logger = Logger.getLogger(InputParser.class);
 	@Autowired
 	private CityMapService mapService;
 
@@ -33,15 +33,15 @@ public class InputParser {
 		this.mapService = mapService;
 	}
 
-	public void parse(File file) {
+	public void parse(String filename) {
 		int no, count, routeId;
-		this.file = file;
 		if (mapService == null) {
-			log.error("Map service is not running");
+			logger.error("Map service is not running");
 			return;
 		}
-
+		
 		try {
+			this.file = new File(filename);
 			scanner = new Scanner(file);
 			String line = scanner.nextLine();
 			no = Integer.parseInt(line);
@@ -67,7 +67,7 @@ public class InputParser {
 			}
 			
 		} catch (Exception e) {
-			log.error("Parser Error" + e);
+			logger.error("Parser Error" + e);
 		}
 
 	}

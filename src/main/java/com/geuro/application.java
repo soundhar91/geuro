@@ -4,6 +4,7 @@ import java.io.File;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,20 +18,25 @@ import main.java.com.geuro.service.CityMapService;
 
 @SpringBootApplication
 @ComponentScan("main.java.com")
-public class application {
+public class Application {
+	static Logger logger = Logger.getLogger(InputParser.class);
 	private static InputParser staticParser;
-	
+
 	@Autowired
 	private InputParser parser;
-	
+
 	@PostConstruct
-	public void init(){
-		application.staticParser = parser;
+	public void init() {
+		Application.staticParser = parser;
 	}
+
 	public static void main(String[] args) {
-		SpringApplication.run(application.class, args);
-		File f = new File(args[0]);
-		staticParser.parse(f);
+		if (args.length != 1) {
+			logger.error("Please pass the only the file name as an argument.");
+		}
+		
+		SpringApplication.run(Application.class, args);
+		staticParser.parse(args[0]);
 	}
 
 }

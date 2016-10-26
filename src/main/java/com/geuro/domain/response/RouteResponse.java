@@ -1,6 +1,8 @@
-package main.java.com.geuro.domain;
+package main.java.com.geuro.domain.response;
 
-public class RouteResponse {
+import main.java.com.geuro.domain.Station;
+
+public class RouteResponse implements Response{
 
 	private int dep_sid;
 	private int arr_sid;
