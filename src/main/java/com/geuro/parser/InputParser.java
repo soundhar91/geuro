@@ -4,32 +4,43 @@ import java.io.File;
 import java.util.Scanner;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import main.java.com.geuro.domain.Route;
 import main.java.com.geuro.domain.Station;
 import main.java.com.geuro.service.CityMapService;
 import org.apache.log4j.Logger;
 
+@Service
 public class InputParser {
-	private File file;
-	private Scanner scanner;
-	static Logger log = Logger.getLogger(InputParser.class);
-	private CityMapService mapService;
+	private static File file;
 
-	public InputParser(String fileName, CityMapService map) {
-		if (fileName.length() == 0) {
-			log.error("File name is empty");
-		}
-		file = new File(fileName);
-		this.mapService = map;
+	public File getFile() {
+		return file;
 	}
 
-	public void parse() {
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	private Scanner scanner;
+	static Logger log = Logger.getLogger(InputParser.class);
+	@Autowired
+	private CityMapService mapService;
+
+	@Autowired
+	public void setMapService(CityMapService mapService) {
+		this.mapService = mapService;
+	}
+
+	public void parse(File file) {
 		int no, count, routeId;
+		this.file = file;
 		if (mapService == null) {
 			log.error("Map service is not running");
 			return;
 		}
+
 		try {
 			scanner = new Scanner(file);
 			String line = scanner.nextLine();
@@ -54,10 +65,11 @@ public class InputParser {
 				}
 				no--;
 			}
-
+			
 		} catch (Exception e) {
-			log.error("Parser Error"+e);
+			log.error("Parser Error" + e);
 		}
 
 	}
+
 }

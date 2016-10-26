@@ -5,27 +5,22 @@ import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import main.java.com.geuro.domain.*;
 import main.java.com.geuro.service.CityMapService;
 
-@Component
+@Service
 public class CityMapServiceImpl implements CityMapService {
 	private HashMap<Route, ArrayList<Station>> RouteMap;
 	private HashMap<Station, ArrayList<Route>> StationMap;
-
-	private static CityMapServiceImpl singleton = new CityMapServiceImpl();
-
-	private CityMapServiceImpl() {
-		RouteMap = new HashMap<Route, ArrayList<Station>>();
-		StationMap = new HashMap<Station, ArrayList<Route>>();
-	}
 
 	public boolean hasStation(Station s) {
 		return StationMap.containsKey(s);
 	}
 
 	public RouteResponse hasDirectRoute(Station station1, Station station2) {
+		System.out.println(StationMap.size()+"---"+RouteMap.size());
 		if (StationMap.containsKey(station1) == false || StationMap.containsKey(station2) == false) {
 			return new RouteResponse(station1, station2, false);
 		}
@@ -60,8 +55,10 @@ public class CityMapServiceImpl implements CityMapService {
 		}
 		RouteMap.get(route).add(station);
 	}
-
-	public static CityMapService getInstance() {
-		return singleton;
+	
+	public CityMapServiceImpl() {
+		RouteMap = new HashMap<Route, ArrayList<Station>>();
+		StationMap = new HashMap<Station, ArrayList<Route>>();
 	}
+
 }

@@ -19,13 +19,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/api")
 public class CityMapController {
-	@Autowired
 	private CityMapService mapService;
 
 	public CityMapService getMapService() {
 		return mapService;
 	}
 
+	@Autowired
 	public void setMapService(CityMapService mapService) {
 		this.mapService = mapService;
 	}
@@ -37,7 +37,7 @@ public class CityMapController {
 	@ResponseBody
 	public RouteResponse getDirectPath(@RequestParam("dep_sid") String startStation,
 			@RequestParam("arr_sid") String endStation) {
-		this.mapService = CityMapServiceImpl.getInstance();
+		
 		Station st1 = new Station(Integer.parseInt(startStation));
 		Station st2 = new Station(Integer.parseInt(endStation));
 		return mapService.hasDirectRoute(st1, st2);
